@@ -11,7 +11,7 @@ public class Login extends JFrame implements ActionListener {
     JTextField textField;
     JPasswordField jPasswordField;
     JButton b1,b2;
-
+    // Constructor for the Login class
     Login(){
 
         JLabel namelabel = new JLabel("Username");
@@ -52,7 +52,6 @@ public class Login extends JFrame implements ActionListener {
         b1.setForeground(Color.white);
         b1.addActionListener(this);
         add(b1);
-
 
         b2 = new JButton("Cancel");
         b2.setBounds(180,140,120,30);
@@ -96,11 +95,7 @@ public class Login extends JFrame implements ActionListener {
         }
 
     }
-
-
     public static void main(String[] args) {
         new Login();
     }
-
-
 }

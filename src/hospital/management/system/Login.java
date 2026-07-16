@@ -112,7 +112,7 @@ public class Login extends JFrame {
         mainPanel.add(b1);
 
         // Secondary Action Button: Exit System Component Modernization
-        b2 = new JButton("Terminate Terminal");
+        b2 = new JButton("Exit Terminal");
         b2.setBounds(375, 400, 320, 42);
         b2.setFont(new Font("Segoe UI", Font.BOLD, 12));
         b2.setBackground(new Color(13, 17, 23));

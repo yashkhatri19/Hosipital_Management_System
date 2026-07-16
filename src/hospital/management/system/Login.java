@@ -122,7 +122,7 @@ public class Login extends JFrame {
                     String user = textField.getText();
                     String pass = new String(passwordField.getPassword());
 
-                    String q = "select * from login where username = '"+user+"' and password = '"+pass+"'";
+                    String q = "select * from login where ID = '"+user+"' and PW = '"+pass+"'";
                     ResultSet resultSet = c.statement.executeQuery(q);
 
                     if (resultSet.next()) {

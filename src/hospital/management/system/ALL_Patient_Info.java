@@ -12,46 +12,46 @@ import java.sql.ResultSet;
 
 public class ALL_Patient_Info extends JFrame {
     ALL_Patient_Info() {
-        // Main structural layout constraints matching system dashboard bounds
+        // Main bounds matching the workspace setup
         setBounds(465, 200, 900, 600);
-        getContentPane().setBackground(new Color(22, 27, 34)); // Matte Cyber Dark background
+        getContentPane().setBackground(new Color(245, 248, 250)); // Soft clean white/light-blue tinted background
         setLayout(null);
         setUndecorated(true);
 
-        // Core containment wrapper panel configuration
+        // Core container panel matching the light minimalist look
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 890, 590);
-        panel.setBackground(new Color(27, 32, 40)); 
-        panel.setBorder(new LineBorder(new Color(156, 39, 176, 120), 1)); // Cyber purple perimeter border
+        panel.setBackground(Color.WHITE); // Pure white card surface
+        panel.setBorder(new LineBorder(new Color(225, 232, 240), 1)); // Very soft gray boundary line
         panel.setLayout(null);
         add(panel);
 
-        // Frame header label section
-        JLabel sectionTitle = new JLabel("PATIENT DATABASE REGISTRY");
-        sectionTitle.setBounds(35, 20, 400, 30);
-        sectionTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        sectionTitle.setForeground(new Color(230, 235, 245));
+        // Header Section with dark bold elegant text
+        JLabel sectionTitle = new JLabel("Patient Database Registry");
+        sectionTitle.setBounds(35, 22, 400, 30);
+        sectionTitle.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        sectionTitle.setForeground(new Color(18, 24, 38)); // Dark charcoal/navy color
         panel.add(sectionTitle);
 
-        // Modern flat design JTable instance setup
+        // Modern Clean JTable Setup
         JTable table = new JTable();
-        table.setBackground(new Color(22, 27, 34));
-        table.setForeground(new Color(200, 210, 230));
-        table.setSelectionBackground(new Color(40, 50, 65));
-        table.setSelectionForeground(Color.WHITE);
+        table.setBackground(Color.WHITE);
+        table.setForeground(new Color(55, 65, 81)); // Clean readability body text
+        table.setSelectionBackground(new Color(230, 247, 255)); // Soft light-cyan row selection tint
+        table.setSelectionForeground(new Color(0, 102, 204));
         table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        table.setRowHeight(35); // Roomy spacing for clean visibility
-        table.setShowGrid(false); // Drop standard legacy grid lines
+        table.setRowHeight(38); // Comfortable vertical padding
+        table.setShowGrid(false); // Clean gridless look
         table.setIntercellSpacing(new Dimension(0, 0));
 
-        // Styling the table column headers globally via JTableHeader
+        // Designing the Header Control Area using the light theme layout
         JTableHeader header = table.getTableHeader();
         header.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        header.setBackground(new Color(36, 44, 54));
-        header.setForeground(new Color(160, 175, 190));
-        header.setBorder(new LineBorder(new Color(50, 62, 78), 1));
+        header.setBackground(new Color(240, 244, 248)); // Tinted off-white background
+        header.setForeground(new Color(100, 116, 139)); // Slate colored muted headings
+        header.setBorder(new LineBorder(new Color(226, 232, 240), 1));
 
-        // Loading standard system records safely from database
+        // Safe database fetching logic blocks
         try {
             conn c = new conn();
             String q = "select * from Patient_Info";
@@ -61,28 +61,29 @@ public class ALL_Patient_Info extends JFrame {
             e.printStackTrace();
         }
 
-        // Custom renderer for handling text alignments and dynamic cell text padding
+        // Custom renderer for cell spacing adjustments and side alignments
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
         cellRenderer.setHorizontalAlignment(JLabel.LEFT);
         cellRenderer.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 0));
         table.setDefaultRenderer(Object.class, cellRenderer);
 
-        // ScrollPane encapsulation layer to secure structural row overflows
+        // ScrollPane encapsulation layer
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(35, 75, 820, 410);
-        scrollPane.setBackground(new Color(22, 27, 34));
-        scrollPane.getViewport().setBackground(new Color(22, 27, 34));
-        scrollPane.setBorder(new LineBorder(new Color(50, 62, 78), 1));
+        scrollPane.setBackground(Color.WHITE);
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBorder(new LineBorder(new Color(226, 232, 240), 1));
         panel.add(scrollPane);
 
-        // Dynamic flat style back navigation button control
-        JButton button = new JButton("CLOSE VIEW");
+        // Modern flat styled navigation action control button
+        JButton button = new JButton("Close View");
         button.setBounds(705, 515, 150, 38);
         button.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        button.setForeground(new Color(244, 67, 54)); // Crimson alert theme text color
-        button.setBackground(new Color(36, 44, 54));
-        button.setBorder(new LineBorder(new Color(244, 67, 54, 150), 1));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(79, 70, 229)); // Clean bright primary accent action blue/indigo
+        button.setBorder(null);
         button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(button);
 
         button.addActionListener(new ActionListener() {

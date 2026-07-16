@@ -1,100 +1,157 @@
 package hospital.management.system;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 
-public class Login extends JFrame implements ActionListener {
+public class Login extends JFrame {
 
     JTextField textField;
-    JPasswordField jPasswordField;
-    JButton b1,b2;
-    // Constructor for the Login class
-    Login(){
+    JPasswordField passwordField;
+    JButton b1, b2;
 
-        JLabel namelabel = new JLabel("Username");
-        namelabel.setBounds(40,20,100,30);
-        namelabel.setFont(new Font("Tahoma",Font.BOLD,16));
-        namelabel.setForeground(Color.BLACK);
-        add(namelabel);
+    Login() {
+        // Main Screen setup - Dark Theme Luxury
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBounds(0, 0, 750, 500);
+        mainPanel.setBackground(new Color(18, 22, 26)); // Deep Cyber Dark Background
+        mainPanel.setLayout(null);
+        add(mainPanel);
 
-        JLabel password = new JLabel("Password");
-        password.setBounds(40,70,100,30);
-        password.setFont(new Font("Tahoma",Font.BOLD,16));
-        password.setForeground(Color.BLACK);
-        add(password);
+        // Decorative Sidebar Graphic Area (Left Panel)
+        JPanel brandPanel = new JPanel();
+        brandPanel.setBounds(0, 0, 320, 500);
+        brandPanel.setBackground(new Color(27, 32, 40)); // Slightly lighter matte finish
+        brandPanel.setLayout(null);
+        mainPanel.add(brandPanel);
+
+        // Sidebar App Branding Title
+        JLabel brandTitle = new JLabel("HOSPITAL OS");
+        brandTitle.setBounds(40, 200, 260, 40);
+        brandTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        brandTitle.setForeground(new Color(230, 235, 245));
+        brandPanel.add(brandTitle);
+
+        JLabel brandSub = new JLabel("Management Dashboard v2.0");
+        brandSub.setBounds(40, 240, 240, 20);
+        brandSub.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        brandSub.setForeground(new Color(110, 125, 140));
+        brandPanel.add(brandSub);
+
+        // Right Section: Clean Interactive Login Form Container
+        JLabel loginHeader = new JLabel("Account Login");
+        loginHeader.setBounds(370, 50, 300, 35);
+        loginHeader.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        loginHeader.setForeground(Color.WHITE);
+        mainPanel.add(loginHeader);
+
+        JLabel loginSub = new JLabel("Enter system operator credentials below.");
+        loginSub.setBounds(370, 90, 300, 20);
+        loginSub.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        loginSub.setForeground(new Color(140, 150, 165));
+        mainPanel.add(loginSub);
+
+        // Username Input field
+        JLabel userLabel = new JLabel("USERNAME");
+        userLabel.setBounds(370, 145, 200, 20);
+        userLabel.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        userLabel.setForeground(new Color(156, 39, 176)); // Vibrant Purple Accent
+        mainPanel.add(userLabel);
 
         textField = new JTextField();
-        textField.setBounds(150,20,150,30);
-        textField.setFont(new Font("Tahoma",Font.PLAIN,15));
-        textField.setBackground(new Color(255,179,0));
-        add(textField);
+        textField.setBounds(370, 170, 320, 42);
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textField.setBackground(new Color(27, 32, 40));
+        textField.setForeground(Color.WHITE);
+        textField.setCaretColor(Color.WHITE);
+        textField.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(50, 60, 75), 1),
+                BorderFactory.createEmptyBorder(0, 12, 0, 12)
+        ));
+        mainPanel.add(textField);
 
-        jPasswordField = new JPasswordField();
-        jPasswordField.setBounds(150,70, 150,30);
-        jPasswordField.setFont(new Font("Tahoma",Font.PLAIN,15));
-        jPasswordField.setBackground(new Color(255,179,0));
-        add(jPasswordField);
+        // Password Input field
+        JLabel passLabel = new JLabel("PASSWORD");
+        passLabel.setBounds(370, 235, 200, 20);
+        passLabel.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        passLabel.setForeground(new Color(156, 39, 176));
+        mainPanel.add(passLabel);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png"));
-        Image i1 = imageIcon.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1 = new ImageIcon(i1);
-        JLabel label = new JLabel(imageIcon1);
-        label.setBounds(320,-30,400,300);
-        add(label);
+        passwordField = new JPasswordField();
+        passwordField.setBounds(370, 260, 320, 42);
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        passwordField.setBackground(new Color(27, 32, 40));
+        passwordField.setForeground(Color.WHITE);
+        passwordField.setCaretColor(Color.WHITE);
+        passwordField.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(50, 60, 75), 1),
+                BorderFactory.createEmptyBorder(0, 12, 0, 12)
+        ));
+        mainPanel.add(passwordField);
 
-        b1 = new JButton("Login");
-        b1.setBounds(40,140,120,30);
-        b1.setFont(new Font("serif",Font.BOLD,15));
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.white);
-        b1.addActionListener(this);
-        add(b1);
+        // Action Trigger Buttons (Glow Purple Submit)
+        b1 = new JButton("Authenticate");
+        b1.setBounds(370, 340, 320, 45);
+        b1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        b1.setBackground(new Color(156, 39, 176)); // Bright Cyber Purple Glow
+        b1.setForeground(Color.WHITE);
+        b1.setFocusPainted(false);
+        b1.setBorderPainted(false);
+        mainPanel.add(b1);
 
-        b2 = new JButton("Cancel");
-        b2.setBounds(180,140,120,30);
-        b2.setFont(new Font("serif",Font.BOLD,15));
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.white);
-        b2.addActionListener(this);
-        add(b2);
+        // Secondary Cancel Button
+        b2 = new JButton("Exit System");
+        b2.setBounds(370, 400, 320, 40);
+        b2.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        b2.setBackground(new Color(18, 22, 26));
+        b2.setForeground(new Color(198, 40, 40)); // Warning Red
+        b2.setFocusPainted(false);
+        b2.setBorder(new LineBorder(new Color(198, 40, 40), 1));
+        mainPanel.add(b2);
 
-        getContentPane().setBackground(new Color(109,164,170));
-        setSize(750,300);
-        setLocation(400,270);
-        setLayout(null);
-        setVisible(true);
+        // Button Action Listeners linking to Backend DB
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    conn c = new conn();
+                    String user = textField.getText();
+                    String pass = new String(passwordField.getPassword());
 
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == b1){
-            try{
-                conn c = new conn();
-                String user = textField.getText();
-                String password = new String(jPasswordField.getPassword());
+                    String q = "select * from login where username = '"+user+"' and password = '"+pass+"'";
+                    ResultSet resultSet = c.statement.executeQuery(q);
 
-                String q = "select * from login where ID = '"+user+"' and  PW = '"+password+"'";
-                ResultSet resultSet = c.statement.executeQuery(q);
-
-                if (resultSet.next()){
-                    new Reception();
-                    setVisible(false);
-                }else {
-                    JOptionPane.showMessageDialog(null,"Invalid");
+                    if (resultSet.next()) {
+                        new Reception();
+                        setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Security Token/Credentials");
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
                 }
-
-            }catch (Exception E){
-                E.printStackTrace();
             }
+        });
 
-        }else {
-            System.exit(10);
-        }
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
+        // Frameless Borderless Glass Design parameters
+        setUndecorated(true);
+        setSize(750, 500);
+        setLayout(null);
+        setLocation(400, 250);
+        setVisible(true);
     }
+
     public static void main(String[] args) {
         new Login();
     }

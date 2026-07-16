@@ -5,6 +5,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.ResultSet;
 import java.util.Date;
 
@@ -195,6 +197,33 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         textFieldDeposite.setBorder(new LineBorder(borderStroke, 1));
         panel.add(textFieldDeposite);
 
+        // --- DYNAMIC AUTO PRICE LOAD ON DROP-DOWN CHANGE ---
+        try {
+            conn c = new conn();
+            ResultSet rs = c.statement.executeQuery("select Price from Room where room_no = '" + c1.getSelectedItem() + "'");
+            if (rs.next()) {
+                textFieldDeposite.setText(rs.getString("Price"));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        c1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                try {
+                    conn c = new conn();
+                    ResultSet rs = c.statement.executeQuery("select Price from Room where room_no = '" + c1.getSelectedItem() + "'");
+                    if (rs.next()) {
+                        textFieldDeposite.setText(rs.getString("Price"));
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        // ----------------------------------------------------
+
         // Action Buttons Setup
         b1 = new JButton("ADD RECORD");
         b1.setBounds(80, 475, 150, 36);
@@ -222,7 +251,6 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b1) {
-            conn c = new conn();
             String radioBTN = null;
             if (r1.isSelected()) {
                 radioBTN = "Male";
@@ -239,14 +267,36 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
             String s8 = textFieldDeposite.getText();
 
             try {
+                conn c = new conn();
+                
+                // Pure validation checking algorithm
+                int enteredDeposit = Integer.parseInt(s8);
+                int actualRoomRent = 0;
+                ResultSet rs = c.statement.executeQuery("select Price from Room where room_no = '" + s6 + "'");
+                if (rs.next()) {
+                    actualRoomRent = Integer.parseInt(rs.getString("Price"));
+                }
+
+                if (enteredDeposit > actualRoomRent) {
+                    JOptionPane.showMessageDialog(null, 
+                        "Error: Deposit amount (" + enteredDeposit + ") cannot exceed Room Rent (" + actualRoomRent + ")!", 
+                        "Validation Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                    return; 
+                }
+
+                // Agar custom logic transparent hai toh statements fire karein
                 String q = "insert into Patient_Info values ('" + s1 + "', '" + s2 + "','" + s3 + "','" + s4 + "', '" + s5 + "', '" + s6 + "', '" + s7 + "', '" + s8 + "')";
-                String q1 = "update room set Availability = 'Occupied' where room_no = " + s6;
+                String q1 = "update room set Availability = 'Occupied' where room_no = '" + s6 + "'";
+                
                 c.statement.executeUpdate(q);
                 c.statement.executeUpdate(q1);
+                
                 JOptionPane.showMessageDialog(null, "Patient Record Added Successfully");
                 setVisible(false);
             } catch (Exception E) {
                 E.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Database Error: " + E.getMessage());
             }
         } else {
             setVisible(false);

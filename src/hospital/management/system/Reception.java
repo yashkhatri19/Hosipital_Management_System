@@ -48,18 +48,21 @@ public class Reception extends JFrame {
         welcomeMsg.setForeground(Color.WHITE);
         topPanel.add(welcomeMsg);
 
-        // Dynamic Vector Artwork placements 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/dr.png"));
-        Image image = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        JLabel label = new JLabel(new ImageIcon(image));
-        label.setBounds(1060, 10, 100, 100);
-        topPanel.add(label);
+        // --- DYNAMICALLY MOVED LOGOUT TERMINAL TO TOP RIGHT ---
+        JButton logoutButton = new JButton("Logout Terminal");
+        logoutButton.setBounds(980, 40, 180, 42); // Clean top-right alignment
+        logoutButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        logoutButton.setFocusPainted(false);
+        logoutButton.setBackground(new Color(27, 32, 40));
+        logoutButton.setForeground(new Color(244, 67, 54));
+        logoutButton.setBorder(new LineBorder(new Color(244, 67, 54), 1));
+        logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        topPanel.add(logoutButton);
 
-        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("icon/amb.png"));
-        Image image1 = i11.getImage().getScaledInstance(180, 60, Image.SCALE_DEFAULT);
-        JLabel label1 = new JLabel(new ImageIcon(image1));
-        label1.setBounds(850, 30, 180, 60);
-        topPanel.add(label1);
+        logoutButton.addActionListener(e -> {
+            setVisible(false);
+            new Login();
+        });
 
         // CENTRAL AREA FOR DYNAMIC FORMS / CONTENT WINDOWS
         JPanel centralDisplay = new JPanel();
@@ -76,34 +79,27 @@ public class Reception extends JFrame {
         mockCard.setBorder(new LineBorder(new Color(156, 39, 176, 100), 1)); // Soft Purple border
         centralDisplay.add(mockCard);
 
-        // UTILITY METHOD TO CREATING STREAMLINED FLAT NAVIGATION BUTTONS
+        // UTILITY METHOD TO CREATING STREAMLINED FLAT NAVIGATION BUTTONS (Reduced size to 9 items)
         String[] btnLabels = {
             "Add New Patient", "Room Status", "Department Info", 
             "All Employee Info", "Patient Records", "Patient Discharge", 
-            "Update Details", "Hospital Ambulance", "Search Room", "Logout Terminal"
+            "Update Details", "Hospital Ambulance", "Search Room"
         };
 
-        JButton[] buttons = new JButton[10];
+        JButton[] buttons = new JButton[9];
         int yOffset = 150; // Dynamic spacing alignment 
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton(btnLabels[i]);
             buttons[i].setBounds(25, yOffset, 250, 42);
             buttons[i].setFont(new Font("Segoe UI", Font.BOLD, 13));
             buttons[i].setFocusPainted(false);
             buttons[i].setHorizontalAlignment(SwingConstants.LEFT);
             buttons[i].setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
-
-            // Distinguish the Logout action button with alert style layout
-            if (i == 9) {
-                buttons[i].setBackground(new Color(27, 32, 40));
-                buttons[i].setForeground(new Color(244, 67, 54));
-                buttons[i].setBorder(new LineBorder(new Color(244, 67, 54), 1));
-            } else {
-                buttons[i].setBackground(new Color(36, 44, 54));
-                buttons[i].setForeground(new Color(200, 210, 230));
-                buttons[i].setBorder(new LineBorder(new Color(50, 62, 78), 1));
-            }
+            buttons[i].setBackground(new Color(36, 44, 54));
+            buttons[i].setForeground(new Color(200, 210, 230));
+            buttons[i].setBorder(new LineBorder(new Color(50, 62, 78), 1));
+            buttons[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             
             navDock.add(buttons[i]);
             yOffset += 55; // Multiplier increment
@@ -119,11 +115,6 @@ public class Reception extends JFrame {
         buttons[6].addActionListener(e -> new update_patient_details());
         buttons[7].addActionListener(e -> new Ambulance());
         buttons[8].addActionListener(e -> new SearchRoom());
-        
-        buttons[9].addActionListener(e -> {
-            setVisible(false);
-            new Login();
-        });
 
         // Frame configuration setups
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Dynamic auto full-screen scale

@@ -84,7 +84,7 @@ public class Department extends JFrame {
         b1.setBorder(new LineBorder(new Color(244, 67, 54, 150), 1));
         b1.setFocusPainted(false);
         panel.add(b1);
-
+    // Add action listener for the close button
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

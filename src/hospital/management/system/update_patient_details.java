@@ -201,7 +201,7 @@ public class update_patient_details extends JFrame {
         setUndecorated(true);
         setSize(950, 500);
         setLayout(null);
-        setLocation(440, 250); // Balanced desktop resolution centering anchors
+        setLocation(440, 230); // Balanced desktop resolution centering anchors
         setVisible(true);
     }
 

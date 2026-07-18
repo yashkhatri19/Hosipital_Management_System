@@ -157,7 +157,7 @@ public class Login extends JFrame {
         setUndecorated(true);
         setSize(750, 500);
         setLayout(null);
-        setLocation(400, 250);
+        setLocation(400, 200);
         setVisible(true);
     }
 

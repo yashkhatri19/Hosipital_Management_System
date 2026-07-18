@@ -21,7 +21,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
 
     NEW_PATIENT() {
         // Main Window Frame Configuration
-        setBounds(530, 220, 850, 550);
+        setBounds(450, 200, 850, 550);
         getContentPane().setBackground(new Color(22, 27, 34)); // Cyber Dark inner frame
         setLayout(null);
         setUndecorated(true);

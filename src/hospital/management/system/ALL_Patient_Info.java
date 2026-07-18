@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public class ALL_Patient_Info extends JFrame {
     ALL_Patient_Info() {
         // Main bounds matching the workspace setup
-        setBounds(465, 200, 900, 600);
+        setBounds(465, 210, 900, 600);
         getContentPane().setBackground(new Color(245, 248, 250)); // Soft clean white/light-blue tinted background
         setLayout(null);
         setUndecorated(true);

@@ -134,7 +134,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         labelDisease.setFont(labelFont);
         labelDisease.setForeground(textMuted);
         panel.add(labelDisease);
-
+        // Disease input field with dynamic styling
         textFieldDisease = new JTextField();
         textFieldDisease.setBounds(230, 270, 220, 28);
         textFieldDisease.setBackground(inputBg);

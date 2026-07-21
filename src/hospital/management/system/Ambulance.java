@@ -39,8 +39,9 @@ public class Ambulance extends JFrame {
         table.setSelectionForeground(new Color(24, 53, 79));
 
         // Embedding dynamic database records
+        conn c = null;
         try {
-            conn c = new conn();
+            c = new conn();
             String q = "select * from Ambulance";
             ResultSet resultSet = c.statement.executeQuery(q);
             table.setModel(DbUtils.resultSetToTableModel(resultSet));

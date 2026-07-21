@@ -41,6 +41,7 @@ public class Login extends JFrame {
         brandTitle.setForeground(new Color(240, 246, 252));
         brandPanel.add(brandTitle);
 
+        // Sidebar Subtitle
         JLabel brandSub = new JLabel("Developed by: Yash Khatri");
         brandSub.setBounds(35, 245, 240, 20);
         brandSub.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -64,10 +65,10 @@ public class Login extends JFrame {
         JLabel userLabel = new JLabel("SYSTEM OPERATOR IDENTITY");
         userLabel.setBounds(375, 145, 300, 20);
         userLabel.setFont(new Font("Segoe UI", Font.BOLD, 10));
-        userLabel.setForeground(new Color(156, 39, 176)); // Unified Aesthetic Color Accent
+        userLabel.setForeground(new Color(156, 39, 176)); 
         mainPanel.add(userLabel);
 
-        // Flat Rounded Smooth Field Concept for Username
+        // Field for Username
         textField = new JTextField();
         textField.setBounds(375, 170, 320, 42);
         textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -87,7 +88,7 @@ public class Login extends JFrame {
         passLabel.setForeground(new Color(156, 39, 176));
         mainPanel.add(passLabel);
 
-        // Flat Rounded Smooth Field Concept for Password
+        // Field for Password
         passwordField = new JPasswordField();
         passwordField.setBounds(375, 260, 320, 42);
         passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -100,7 +101,7 @@ public class Login extends JFrame {
         ));
         mainPanel.add(passwordField);
 
-        // Action Trigger Button: Authenticate Button Upgrades
+        // Authenticate Button
         b1 = new JButton("Authenticate Session");
         b1.setBounds(375, 340, 320, 45);
         b1.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -111,41 +112,45 @@ public class Login extends JFrame {
         b1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mainPanel.add(b1);
 
-        // Secondary Action Button: Exit System Component Modernization
+        // Exit Button
         b2 = new JButton("Exit Terminal");
         b2.setBounds(375, 400, 320, 42);
         b2.setFont(new Font("Segoe UI", Font.BOLD, 12));
         b2.setBackground(new Color(13, 17, 23));
-        b2.setForeground(new Color(248, 81, 73)); // High Visibility System Red
+        b2.setForeground(new Color(248, 81, 73)); 
         b2.setFocusPainted(false);
         b2.setBorder(new LineBorder(new Color(248, 81, 73, 120), 1));
         b2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         mainPanel.add(b2);
 
-        // DB Transaction Listeners Block
+        // Authenticate Listener Block
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                conn c = null; // Variable try block se pehle declare kiya taaki finally ko mil sake
                 try {
-                    conn c = new conn();
+                    c = new conn();
+                    
                     String user = textField.getText();
                     String pass = new String(passwordField.getPassword());
-
-                    String q = "select * from login where ID = '"+user+"' and PW = '"+pass+"'";
+                    
+                    String q = "select * from login where ID = '" + user + "' and PW = '" + pass + "'";
                     ResultSet resultSet = c.statement.executeQuery(q);
-
+                    
                     if (resultSet.next()) {
-                        new Reception();
-                        setVisible(false);
+                        new Reception(); 
+                        setVisible(false); 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Invalid Security Token/Credentials");
+                        JOptionPane.showMessageDialog(null, "Invalid Security Credentials!");
                     }
-                } catch (Exception E) {
-                    E.printStackTrace();
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
 
+        // Exit Listener Block
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

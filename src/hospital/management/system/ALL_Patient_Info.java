@@ -52,8 +52,9 @@ public class ALL_Patient_Info extends JFrame {
         header.setBorder(new LineBorder(new Color(226, 232, 240), 1));
 
         // Safe database fetching logic blocks
+        conn c = null;
         try {
-            conn c = new conn();
+            c = new conn();
             String q = "select * from Patient_Info";
             ResultSet resultSet = c.statement.executeQuery(q);
             table.setModel(DbUtils.resultSetToTableModel(resultSet));

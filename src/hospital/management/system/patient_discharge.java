@@ -151,8 +151,9 @@ public class patient_discharge extends JFrame {
         discharge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                conn c = null; // Variable try block se pehle declare kiya taaki finally ko mil sake
                 try {
-                    conn c = new conn();
+                    c = new conn();
                     c.statement.executeUpdate("delete from Patient_Info where number = '" + choice.getSelectedItem() + "'");
                     c.statement.executeUpdate("update room set Availability = 'Available' where room_no = '" + RNo.getText() + "'");
                     JOptionPane.showMessageDialog(null, "Patient Node Erased. Room Reset Done.");

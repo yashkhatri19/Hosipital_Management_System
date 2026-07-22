@@ -88,7 +88,7 @@ public class Reception extends JFrame {
 
         JButton[] buttons = new JButton[9];
         int yOffset = 150; // Dynamic spacing alignment 
-
+        // Loop to create and style buttons with consistent design
         for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton(btnLabels[i]);
             buttons[i].setBounds(25, yOffset, 250, 42);

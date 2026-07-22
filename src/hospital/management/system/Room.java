@@ -114,7 +114,7 @@ public class Room extends JFrame {
         setLocation(450, 200);
         setVisible(true);
     }
-
+    // Main Method to Launch the Room Display
     public static void main(String[] args) {
         new Room();
     }

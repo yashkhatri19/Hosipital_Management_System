@@ -41,7 +41,7 @@ public class Reception extends JFrame {
         topPanel.setBackground(new Color(27, 32, 40));
         topPanel.setLayout(null);
         mainCanvas.add(topPanel);
-
+        // Decorative Neon Accent Line
         JLabel welcomeMsg = new JLabel("System Overview & Operations");
         welcomeMsg.setBounds(30, 45, 400, 30);
         welcomeMsg.setFont(new Font("Segoe UI", Font.BOLD, 22));

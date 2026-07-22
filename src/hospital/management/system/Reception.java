@@ -58,7 +58,7 @@ public class Reception extends JFrame {
         logoutButton.setBorder(new LineBorder(new Color(244, 67, 54), 1));
         logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         topPanel.add(logoutButton);
-
+        // Logout action listener to return to login screen
         logoutButton.addActionListener(e -> {
             setVisible(false);
             new Login();

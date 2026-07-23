@@ -28,7 +28,7 @@ public class Reception extends JFrame {
         appTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
         appTitle.setForeground(new Color(230, 235, 245));
         navDock.add(appTitle);
-
+        // Application Subtitle for context
         JLabel appSub = new JLabel("Reception Terminal Workspace");
         appSub.setBounds(35, 70, 230, 20);
         appSub.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -85,7 +85,7 @@ public class Reception extends JFrame {
             "All Employee Info", "Patient Records", "Patient Discharge", 
             "Update Details", "Hospital Ambulance", "Search Room"
         };
-
+        // Array to hold buttons for dynamic creation
         JButton[] buttons = new JButton[9];
         int yOffset = 150; // Dynamic spacing alignment 
         // Loop to create and style buttons with consistent design

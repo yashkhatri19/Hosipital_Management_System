@@ -132,7 +132,7 @@ public class SearchRoom extends JFrame {
         setLocation(530, 220); // Perfectly centered alignment adjustments inside the dashboard main display card
         setVisible(true);
     }
-
+    // Load Table Data Method with Centered Text Alignment for Professional Feel
     private void loadTableData(String query) {
         try {
             conn c = new conn();

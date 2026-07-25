@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-
+// Feature: SearchRoom.java - A modern, glassmorphic styled pop-up panel for searching and filtering room availability status in a hospital management system.
 public class SearchRoom extends JFrame {
 
     JComboBox<String> statusCombo;

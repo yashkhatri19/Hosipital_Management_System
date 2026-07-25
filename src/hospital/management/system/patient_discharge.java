@@ -173,7 +173,7 @@ public class patient_discharge extends JFrame {
         setLocation(470, 260);
         setVisible(true);
     }
-
+    // Utility method to apply consistent cyber-style button aesthetics
     private void applyCyberStyleButton(JButton btn, Color bg, Color fg) {
         btn.setBackground(bg);
         btn.setForeground(fg);

@@ -94,7 +94,7 @@ public class Employee_info extends JFrame {
 
         setVisible(true);
     }
-
+   // Main method to launch the Employee_info window independently
     public static void main(String[] args) {
         new Employee_info();
     }

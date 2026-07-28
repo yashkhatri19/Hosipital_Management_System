@@ -10,72 +10,69 @@ import java.util.Date;
 
 public class patient_discharge extends JFrame {
     
-    // Global declarations for safe state management
-    private Choice choice;
+    private Choice nameChoice;
     private JLabel RNo;
     private JLabel INTime;
 
     public patient_discharge() {
-        // Main structural base canvas setup (Deep Space Navy Theme)
+        // Main Canvas
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 800, 400);
-        panel.setBackground(new Color(20, 24, 38)); // Dark Dashboard Deep Blue background
+        panel.setBackground(new Color(20, 24, 38));
         panel.setBorder(new LineBorder(new Color(36, 44, 68), 1));
         panel.setLayout(null);
         add(panel);
 
-        // Section Typography Branding Module
+        // Header Title
         JLabel label = new JLabel("COMMAND CENTER  >  PATIENT DISCHARGE");
         label.setBounds(40, 30, 500, 22);
         label.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        label.setForeground(new Color(0, 240, 255)); // Cyber Neon Cyan Accent Text
+        label.setForeground(new Color(0, 240, 255));
         panel.add(label);
 
-        // Subtitle line indicator
-        JLabel labelSub = new JLabel("System Telemetry: Purge database logs and update room keys.");
+        JLabel labelSub = new JLabel("Archive patient records and reset room allocations.");
         labelSub.setBounds(40, 55, 500, 15);
         labelSub.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         labelSub.setForeground(new Color(120, 132, 168));
         panel.add(labelSub);
 
-        // Workspace Container Card - Expanded to fill the layout dynamically (Width changed from 460 to 720)
+        // Container Card
         JPanel cardContainer = new JPanel();
         cardContainer.setBounds(40, 95, 720, 265); 
-        cardContainer.setBackground(new Color(27, 33, 53)); // Tinted secondary deep blue card
+        cardContainer.setBackground(new Color(27, 33, 53));
         cardContainer.setBorder(new LineBorder(new Color(42, 53, 84), 1));
         cardContainer.setLayout(null);
         panel.add(cardContainer);
 
-        // Reusable Typography settings
         Font labelFont = new Font("Segoe UI", Font.BOLD, 13);
         Color mutedTextColor = new Color(165, 180, 215);
         Color highlightValueColor = new Color(255, 255, 255);
 
-        // 1. Selector Module
-        JLabel label2 = new JLabel("Customer Identity");
-        label2.setBounds(40, 25, 160, 20); // Extends clean spacing padding
+        // Patient Selector
+        JLabel label2 = new JLabel("Patient Name");
+        label2.setBounds(40, 25, 160, 20); 
         label2.setFont(labelFont);
         label2.setForeground(mutedTextColor);
         cardContainer.add(label2);
 
-        choice = new Choice();
-        choice.setBounds(240, 22, 440, 25); // Component stretched horizontally for a premium dashboard look
-        choice.setBackground(new Color(36, 44, 68));
-        choice.setForeground(Color.WHITE);
-        choice.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cardContainer.add(choice);
+        nameChoice = new Choice();
+        nameChoice.setBounds(240, 22, 440, 25); 
+        nameChoice.setBackground(new Color(36, 44, 68));
+        nameChoice.setForeground(Color.WHITE);
+        nameChoice.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cardContainer.add(nameChoice);
 
         try {
             conn c = new conn();
-            ResultSet resultSet = c.statement.executeQuery("select * from Patient_Info");
+            ResultSet resultSet = c.statement.executeQuery("select Name from Patient_Info");
             while (resultSet.next()) {
-                choice.add(resultSet.getString("number"));
+                nameChoice.add(resultSet.getString("Name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // 2. Room Data Entry Node
+        // Room Field
         JLabel label3 = new JLabel("Assigned Room");
         label3.setBounds(40, 70, 160, 20);
         label3.setFont(labelFont);
@@ -85,10 +82,10 @@ public class patient_discharge extends JFrame {
         RNo = new JLabel("---");
         RNo.setBounds(240, 70, 440, 20);
         RNo.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        RNo.setForeground(new Color(168, 85, 247)); // Electric Purple Accent for variables
+        RNo.setForeground(new Color(168, 85, 247));
         cardContainer.add(RNo);
 
-        // 3. Admission Clock Metric Node
+        // In-Time Field
         JLabel label4 = new JLabel("System In-Time");
         label4.setBounds(40, 115, 160, 20);
         label4.setFont(labelFont);
@@ -101,7 +98,7 @@ public class patient_discharge extends JFrame {
         INTime.setForeground(highlightValueColor);
         cardContainer.add(INTime);
 
-        // 4. Out-Time Clock Metric Node
+        // Out-Time Field
         JLabel label5 = new JLabel("Telemetry Out-Time");
         label5.setBounds(40, 160, 160, 20);
         label5.setFont(labelFont);
@@ -115,29 +112,29 @@ public class patient_discharge extends JFrame {
         OUTTime.setForeground(highlightValueColor);
         cardContainer.add(OUTTime);
 
-        // --- BUTTON INTERFACES (Aligned at the bottom right side of the main card panel) ---
+        // Buttons
         JButton Check = new JButton("CHECK");
         Check.setBounds(240, 210, 130, 36);
-        applyCyberStyleButton(Check, new Color(13, 148, 136), Color.WHITE); // Matte Emerald/Teal Control
+        applyCyberStyleButton(Check, new Color(13, 148, 136), Color.WHITE); 
         cardContainer.add(Check);
 
         JButton discharge = new JButton("DISCHARGE");
         discharge.setBounds(395, 210, 130, 36);
-        applyCyberStyleButton(discharge, new Color(220, 38, 38), Color.WHITE); // Crimson Danger Warning Focus
+        applyCyberStyleButton(discharge, new Color(220, 38, 38), Color.WHITE); 
         cardContainer.add(discharge);
 
         JButton Back = new JButton("CANCEL");
         Back.setBounds(550, 210, 130, 36);
-        applyCyberStyleButton(Back, new Color(55, 65, 81), new Color(209, 213, 219)); // Slate Grey Neutral Tone
+        applyCyberStyleButton(Back, new Color(55, 65, 81), new Color(209, 213, 219)); 
         cardContainer.add(Back);
 
-        // --- CORE DATABASE OPERATIONS ---
+        // Action Handlers
         Check.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     conn c = new conn();
-                    ResultSet resultSet = c.statement.executeQuery("select * from Patient_Info where number = '" + choice.getSelectedItem() + "'");
+                    ResultSet resultSet = c.statement.executeQuery("select * from Patient_Info where Name = '" + nameChoice.getSelectedItem() + "'");
                     while (resultSet.next()) {
                         RNo.setText(resultSet.getString("Room_Number"));
                         INTime.setText(resultSet.getString("Time"));
@@ -151,12 +148,24 @@ public class patient_discharge extends JFrame {
         discharge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                conn c = null; // Variable try block se pehle declare kiya taaki finally ko mil sake
                 try {
-                    c = new conn();
-                    c.statement.executeUpdate("delete from Patient_Info where number = '" + choice.getSelectedItem() + "'");
-                    c.statement.executeUpdate("update room set Availability = 'Available' where room_no = '" + RNo.getText() + "'");
-                    JOptionPane.showMessageDialog(null, "Patient Node Erased. Room Reset Done.");
+                    conn c = new conn();
+                    String name = nameChoice.getSelectedItem();
+                    String room = RNo.getText();
+                    String inTime = INTime.getText();
+                    String outTime = OUTTime.getText();
+
+                    // 1. Archive to Discharge_History
+                    String archiveQuery = "insert into Discharge_History values('" + name + "', '" + room + "', '" + inTime + "', '" + outTime + "')";
+                    c.statement.executeUpdate(archiveQuery);
+
+                    // 2. Remove from active patients
+                    c.statement.executeUpdate("delete from Patient_Info where Name = '" + name + "'");
+
+                    // 3. Mark room as available
+                    c.statement.executeUpdate("update room set Availability = 'Available' where room_no = '" + room + "'");
+
+                    JOptionPane.showMessageDialog(null, "Patient Archived & Discharged Successfully!");
                     setVisible(false);
                 } catch (Exception E) {
                     E.printStackTrace();
@@ -166,14 +175,13 @@ public class patient_discharge extends JFrame {
 
         Back.addActionListener(e -> setVisible(false));
 
-        // Window Frame Parameter Directives
         setUndecorated(true);
         setSize(800, 400);
         setLayout(null);
         setLocation(470, 260);
         setVisible(true);
     }
-    // Utility method to apply consistent cyber-style button aesthetics
+
     private void applyCyberStyleButton(JButton btn, Color bg, Color fg) {
         btn.setBackground(bg);
         btn.setForeground(fg);

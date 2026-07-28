@@ -85,9 +85,9 @@ public class Employee_info extends JFrame {
         button.setFocusPainted(false);
         panel.add(button);
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e){
                 setVisible(false);
             }
         });

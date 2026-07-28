@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-
 public class Reception extends JFrame {
 
     Reception() {
@@ -24,13 +23,14 @@ public class Reception extends JFrame {
 
         // Application Branding Title inside Navbar
         JLabel appTitle = new JLabel("HOSPITAL OS");
-        appTitle.setBounds(35, 40, 230, 30);
+        appTitle.setBounds(35, 30, 230, 30);
         appTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
         appTitle.setForeground(new Color(230, 235, 245));
         navDock.add(appTitle);
+
         // Application Subtitle for context
         JLabel appSub = new JLabel("Reception Terminal Workspace");
-        appSub.setBounds(35, 70, 230, 20);
+        appSub.setBounds(35, 60, 230, 20);
         appSub.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         appSub.setForeground(new Color(110, 125, 140));
         navDock.add(appSub);
@@ -41,6 +41,7 @@ public class Reception extends JFrame {
         topPanel.setBackground(new Color(27, 32, 40));
         topPanel.setLayout(null);
         mainCanvas.add(topPanel);
+
         // Decorative Neon Accent Line
         JLabel welcomeMsg = new JLabel("System Overview & Operations");
         welcomeMsg.setBounds(30, 45, 400, 30);
@@ -58,6 +59,7 @@ public class Reception extends JFrame {
         logoutButton.setBorder(new LineBorder(new Color(244, 67, 54), 1));
         logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         topPanel.add(logoutButton);
+
         // Logout action listener to return to login screen
         logoutButton.addActionListener(e -> {
             setVisible(false);
@@ -72,26 +74,26 @@ public class Reception extends JFrame {
         centralDisplay.setLayout(null);
         mainCanvas.add(centralDisplay);
 
-        // Decorative Neon Metric Card Placeholder like the reference chart area
+        // Decorative Neon Metric Card Placeholder
         JPanel mockCard = new JPanel();
         mockCard.setBounds(40, 40, 1110, 560);
         mockCard.setBackground(new Color(22, 27, 34));
         mockCard.setBorder(new LineBorder(new Color(156, 39, 176, 100), 1)); // Soft Purple border
         centralDisplay.add(mockCard);
 
-        // UTILITY METHOD TO CREATING STREAMLINED FLAT NAVIGATION BUTTONS (Reduced size to 9 items)
+        // UTILITY METHOD FOR CREATING NAVIGATION BUTTONS (Updated to 10 items)
         String[] btnLabels = {
             "Add New Patient", "Room Status", "Department Info", 
             "All Employee Info", "Patient Records", "Patient Discharge", 
-            "Update Details", "Hospital Ambulance", "Search Room"
+            "Update Details", "Hospital Ambulance", "Search Room", "Patient History"
         };
-        // Array to hold buttons for dynamic creation
-        JButton[] buttons = new JButton[9];
-        int yOffset = 150; // Dynamic spacing alignment 
-        // Loop to create and style buttons with consistent design
-        for (int i = 0; i < 9; i++) {
+
+        JButton[] buttons = new JButton[10];
+        int yOffset = 110; // Spacing adjusted for 10 buttons
+
+        for (int i = 0; i < 10; i++) {
             buttons[i] = new JButton(btnLabels[i]);
-            buttons[i].setBounds(25, yOffset, 250, 42);
+            buttons[i].setBounds(25, yOffset, 250, 40);
             buttons[i].setFont(new Font("Segoe UI", Font.BOLD, 13));
             buttons[i].setFocusPainted(false);
             buttons[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -102,10 +104,10 @@ public class Reception extends JFrame {
             buttons[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             
             navDock.add(buttons[i]);
-            yOffset += 55; // Multiplier increment
+            yOffset += 50;
         }
 
-        // Action Trigger Configuration mappings
+        // Action Trigger Configuration Mappings
         buttons[0].addActionListener(e -> new NEW_PATIENT());
         buttons[1].addActionListener(e -> new Room());
         buttons[2].addActionListener(e -> new Department());
@@ -115,6 +117,7 @@ public class Reception extends JFrame {
         buttons[6].addActionListener(e -> new update_patient_details());
         buttons[7].addActionListener(e -> new Ambulance());
         buttons[8].addActionListener(e -> new SearchRoom());
+        buttons[9].addActionListener(e -> new Patient_History()); // Opens Patient_History window
 
         // Frame configuration setups
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Dynamic auto full-screen scale

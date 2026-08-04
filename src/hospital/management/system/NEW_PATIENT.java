@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class NEW_PATIENT extends JFrame implements ActionListener {
     JComboBox<String> comboBox;
-    JTextField textFieldNumber, textName, textFieldDisease, textFieldDeposite;
+    JTextField textFieldNumber, textName, textFieldDisease, textFieldDeposite, textFieldPhone, textFieldAddress;
     JRadioButton r1, r2;
     ButtonGroup genderGroup;
     Choice c1;
@@ -20,133 +20,165 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
     JButton b1, b2;
 
     NEW_PATIENT() {
-        // Main Window Frame Configuration
-        setBounds(450, 200, 850, 550);
+        // Main Window Frame Configuration (Height increased to 630 to fit new fields)
+        setBounds(450, 150, 850, 630);
         getContentPane().setBackground(new Color(22, 27, 34)); // Cyber Dark inner frame
         setLayout(null);
         setUndecorated(true);
 
-        // Core container panel with dynamic neon glow accent border
+        // Core container panel
         JPanel panel = new JPanel();
-        panel.setBounds(5, 5, 840, 540);
+        panel.setBounds(5, 5, 840, 620);
         panel.setBackground(new Color(27, 32, 40)); 
-        panel.setBorder(new LineBorder(new Color(156, 39, 176, 120), 1)); // Soft purple cyber border
+        panel.setBorder(new LineBorder(new Color(156, 39, 176, 120), 1));
         panel.setLayout(null);
         add(panel);
 
-        // Form Header Customization
+        // Form Header
         JLabel labelName = new JLabel("NEW PATIENT REGISTRATION");
-        labelName.setBounds(50, 25, 400, 40);
+        labelName.setBounds(50, 20, 400, 35);
         labelName.setFont(new Font("Segoe UI", Font.BOLD, 22));
         labelName.setForeground(new Color(230, 235, 245));
         panel.add(labelName);
 
-        // Right side Vector Artwork Setup
+        // Vector Artwork Setup
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/patient.png"));
         Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
         JLabel label = new JLabel(new ImageIcon(image));
-        label.setBounds(540, 150, 200, 200);
+        label.setBounds(550, 180, 200, 200);
         panel.add(label);
 
-        // Form Fields Styling configurations
-        Font labelFont = new Font("Segoe UI", Font.BOLD, 14);
+        // Styling configurations
+        Font labelFont = new Font("Segoe UI", Font.BOLD, 13);
         Color textMuted = new Color(160, 175, 190);
         Color inputBg = new Color(22, 27, 34);
         Color borderStroke = new Color(50, 62, 78);
 
-        // ID Dropdown
+        // 1. ID Dropdown
         JLabel labelID = new JLabel("Identity Document :");
-        labelID.setBounds(50, 90, 160, 25);
+        labelID.setBounds(50, 70, 160, 25);
         labelID.setFont(labelFont);
         labelID.setForeground(textMuted);
         panel.add(labelID);
 
         comboBox = new JComboBox<>(new String[] {"Aadhar Card", "Voter Id", "Driving License"});
-        comboBox.setBounds(230, 90, 220, 28);
+        comboBox.setBounds(230, 70, 220, 28);
         comboBox.setBackground(inputBg);
         comboBox.setForeground(Color.white);
-        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         comboBox.setBorder(new LineBorder(borderStroke, 1));
         panel.add(comboBox);
 
-        // Document Number Field
+        // 2. Document Number Field
         JLabel labelNumber = new JLabel("Document Number :");
-        labelNumber.setBounds(50, 135, 160, 25);
+        labelNumber.setBounds(50, 110, 160, 25);
         labelNumber.setFont(labelFont);
         labelNumber.setForeground(textMuted);
         panel.add(labelNumber);
 
         textFieldNumber = new JTextField();
-        textFieldNumber.setBounds(230, 135, 220, 28);
+        textFieldNumber.setBounds(230, 110, 220, 28);
         textFieldNumber.setBackground(inputBg);
         textFieldNumber.setForeground(Color.white);
         textFieldNumber.setCaretColor(Color.white);
-        textFieldNumber.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textFieldNumber.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         textFieldNumber.setBorder(new LineBorder(borderStroke, 1));
         panel.add(textFieldNumber);
 
-        // Patient Name Field
+        // 3. Patient Name Field
         JLabel labelName1 = new JLabel("Patient Name :");
-        labelName1.setBounds(50, 180, 160, 25);
+        labelName1.setBounds(50, 150, 160, 25);
         labelName1.setFont(labelFont);
         labelName1.setForeground(textMuted);
         panel.add(labelName1);
 
         textName = new JTextField();
-        textName.setBounds(230, 180, 220, 28);
+        textName.setBounds(230, 150, 220, 28);
         textName.setBackground(inputBg);
         textName.setForeground(Color.white);
         textName.setCaretColor(Color.white);
-        textName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textName.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         textName.setBorder(new LineBorder(borderStroke, 1));
         panel.add(textName);
 
-        // Gender Choice Buttons
+        // 4. Gender Selection
         JLabel labelGender = new JLabel("Gender Selection :");
-        labelGender.setBounds(50, 225, 160, 25);
+        labelGender.setBounds(50, 190, 160, 25);
         labelGender.setFont(labelFont);
         labelGender.setForeground(textMuted);
         panel.add(labelGender);
 
         r1 = new JRadioButton("Male");
-        r1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        r1.setFont(new Font("Segoe UI", Font.BOLD, 13));
         r1.setForeground(Color.white);
         r1.setBackground(new Color(27, 32, 40));
         r1.setFocusPainted(false);
-        r1.setBounds(230, 225, 80, 25);
+        r1.setBounds(230, 190, 80, 25);
         panel.add(r1);
 
         r2 = new JRadioButton("Female");
-        r2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        r2.setFont(new Font("Segoe UI", Font.BOLD, 13));
         r2.setForeground(Color.white);
         r2.setBackground(new Color(27, 32, 40));
         r2.setFocusPainted(false);
-        r2.setBounds(320, 225, 90, 25);
+        r2.setBounds(320, 190, 90, 25);
         panel.add(r2);
 
         genderGroup = new ButtonGroup();
         genderGroup.add(r1);
         genderGroup.add(r2);
 
-        // Disease Diagnostics Input
+        // 5. Phone Number Field (NEW)
+        JLabel labelPhone = new JLabel("Phone Number :");
+        labelPhone.setBounds(50, 230, 160, 25);
+        labelPhone.setFont(labelFont);
+        labelPhone.setForeground(textMuted);
+        panel.add(labelPhone);
+
+        textFieldPhone = new JTextField();
+        textFieldPhone.setBounds(230, 230, 220, 28);
+        textFieldPhone.setBackground(inputBg);
+        textFieldPhone.setForeground(Color.white);
+        textFieldPhone.setCaretColor(Color.white);
+        textFieldPhone.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        textFieldPhone.setBorder(new LineBorder(borderStroke, 1));
+        panel.add(textFieldPhone);
+
+        // 6. Address Field (NEW)
+        JLabel labelAddress = new JLabel("Patient Address :");
+        labelAddress.setBounds(50, 270, 160, 25);
+        labelAddress.setFont(labelFont);
+        labelAddress.setForeground(textMuted);
+        panel.add(labelAddress);
+
+        textFieldAddress = new JTextField();
+        textFieldAddress.setBounds(230, 270, 220, 28);
+        textFieldAddress.setBackground(inputBg);
+        textFieldAddress.setForeground(Color.white);
+        textFieldAddress.setCaretColor(Color.white);
+        textFieldAddress.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        textFieldAddress.setBorder(new LineBorder(borderStroke, 1));
+        panel.add(textFieldAddress);
+
+        // 7. Disease Diagnostics Input
         JLabel labelDisease = new JLabel("Diagnosis / Disease :");
-        labelDisease.setBounds(50, 270, 160, 25);
+        labelDisease.setBounds(50, 310, 160, 25);
         labelDisease.setFont(labelFont);
         labelDisease.setForeground(textMuted);
         panel.add(labelDisease);
-        // Disease input field with dynamic styling
+
         textFieldDisease = new JTextField();
-        textFieldDisease.setBounds(230, 270, 220, 28);
+        textFieldDisease.setBounds(230, 310, 220, 28);
         textFieldDisease.setBackground(inputBg);
         textFieldDisease.setForeground(Color.white);
         textFieldDisease.setCaretColor(Color.white);
-        textFieldDisease.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textFieldDisease.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         textFieldDisease.setBorder(new LineBorder(borderStroke, 1));
         panel.add(textFieldDisease);
 
-        // Room Selection Choice
+        // 8. Room Selection Choice
         JLabel labelRoom = new JLabel("Assigned Room :");
-        labelRoom.setBounds(50, 315, 160, 25);
+        labelRoom.setBounds(50, 350, 160, 25);
         labelRoom.setFont(labelFont);
         labelRoom.setForeground(textMuted);
         panel.add(labelRoom);
@@ -161,43 +193,43 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        c1.setBounds(230, 315, 220, 28);
-        c1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        c1.setBounds(230, 350, 220, 28);
+        c1.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         c1.setForeground(Color.WHITE);
         c1.setBackground(inputBg);
         panel.add(c1);
 
-        // System Generated Timestamp
+        // 9. Check-in Timestamp
         JLabel labelDate = new JLabel("Check-in Time :");
-        labelDate.setBounds(50, 360, 160, 25);
+        labelDate.setBounds(50, 390, 160, 25);
         labelDate.setFont(labelFont);
         labelDate.setForeground(textMuted);
         panel.add(labelDate);
 
         Date date1 = new Date();
         date = new JLabel("" + date1);
-        date.setBounds(230, 360, 250, 25);
-        date.setForeground(new Color(0, 229, 255)); // Tech Cyan dynamic color accent
-        date.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        date.setBounds(230, 390, 250, 25);
+        date.setForeground(new Color(0, 229, 255));
+        date.setFont(new Font("Segoe UI", Font.BOLD, 12));
         panel.add(date);
 
-        // Advanced Deposit input
+        // 10. Advance Deposit Input
         JLabel labelDeposite = new JLabel("Advance Deposit :");
-        labelDeposite.setBounds(50, 405, 160, 25);
+        labelDeposite.setBounds(50, 430, 160, 25);
         labelDeposite.setFont(labelFont);
         labelDeposite.setForeground(textMuted);
         panel.add(labelDeposite);
 
         textFieldDeposite = new JTextField();
-        textFieldDeposite.setBounds(230, 405, 220, 28);
+        textFieldDeposite.setBounds(230, 430, 220, 28);
         textFieldDeposite.setBackground(inputBg);
         textFieldDeposite.setForeground(Color.white);
         textFieldDeposite.setCaretColor(Color.white);
-        textFieldDeposite.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textFieldDeposite.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         textFieldDeposite.setBorder(new LineBorder(borderStroke, 1));
         panel.add(textFieldDeposite);
 
-        // --- DYNAMIC AUTO PRICE LOAD ON DROP-DOWN CHANGE ---
+        // Auto Price Loader
         try {
             conn c = new conn();
             ResultSet rs = c.statement.executeQuery("select Price from Room where room_no = '" + c1.getSelectedItem() + "'");
@@ -222,11 +254,10 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
                 }
             }
         });
-        // ----------------------------------------------------
 
         // Action Buttons Setup
         b1 = new JButton("ADD RECORD");
-        b1.setBounds(80, 475, 150, 36);
+        b1.setBounds(80, 520, 150, 36);
         b1.setFont(new Font("Segoe UI", Font.BOLD, 13));
         b1.setForeground(Color.WHITE);
         b1.setBackground(new Color(36, 44, 54));
@@ -236,7 +267,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         panel.add(b1);
 
         b2 = new JButton("CANCEL");
-        b2.setBounds(260, 475, 150, 36);
+        b2.setBounds(260, 520, 150, 36);
         b2.setFont(new Font("Segoe UI", Font.BOLD, 13));
         b2.setForeground(new Color(244, 67, 54));
         b2.setBackground(new Color(36, 44, 54));
@@ -265,11 +296,12 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
             String s6 = c1.getSelectedItem();
             String s7 = date.getText();
             String s8 = textFieldDeposite.getText();
+            String s9 = textFieldPhone.getText();    // Phone Number
+            String s10 = textFieldAddress.getText(); // Address
 
             try {
                 conn c = new conn();
                 
-                // Pure validation checking algorithm
                 int enteredDeposit = Integer.parseInt(s8);
                 int actualRoomRent = 0;
                 ResultSet rs = c.statement.executeQuery("select Price from Room where room_no = '" + s6 + "'");
@@ -285,8 +317,8 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
                     return; 
                 }
 
-                // Agar custom logic transparent hai toh statements fire karein
-                String q = "insert into Patient_Info values ('" + s1 + "', '" + s2 + "','" + s3 + "','" + s4 + "', '" + s5 + "', '" + s6 + "', '" + s7 + "', '" + s8 + "')";
+                // Updated SQL statement including phone and address
+                String q = "insert into Patient_Info values ('" + s1 + "', '" + s2 + "','" + s3 + "','" + s4 + "', '" + s5 + "', '" + s6 + "', '" + s7 + "', '" + s8 + "', '" + s9 + "', '" + s10 + "')";
                 String q1 = "update room set Availability = 'Occupied' where room_no = '" + s6 + "'";
                 
                 c.statement.executeUpdate(q);
